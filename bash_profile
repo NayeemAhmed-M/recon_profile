@@ -16,6 +16,9 @@ aws s3 cp $2 s3://$1
 certspotter(){
 curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1
 } #h/t Michiel Prins
+#certspotter yahoo.com (for subdomains)
+# | wc -l (for count)
+# "subdomain" | httprobe (for with http links)
 
 crtsh(){
 curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep $1
