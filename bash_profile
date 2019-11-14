@@ -19,6 +19,7 @@ curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' 
 #certspotter yahoo.com (for subdomains)
 # | wc -l (for count)
 # "subdomain" | httprobe (for with http links)
+# "subdomain" | grep api | httprobe
 
 crtsh(){
 curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep $1
