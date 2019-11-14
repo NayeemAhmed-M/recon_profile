@@ -24,6 +24,7 @@ curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' 
 crtsh(){
 curl -s https://crt.sh/?q=%.$1  | sed 's/<\/\?[^>]\+>//g' | grep $1
 }
+#curl -s 'https://crt.sh/?q=%25api%25.yahoo.com&output=json' | jq -r '.[].name_value'  | sed 's/\*\.//g' | sort -u
 
 certnmap(){
 curl https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1  | nmap -T5 -Pn -sS -i - -$
